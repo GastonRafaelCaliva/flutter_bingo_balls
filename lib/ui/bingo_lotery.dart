@@ -14,12 +14,7 @@ class BingoLotery extends StatefulWidget {
 class _BingoLoteryState extends State<BingoLotery> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: _body(),
-      ),
-    );
+    return _body();
   }
 
   _body() {

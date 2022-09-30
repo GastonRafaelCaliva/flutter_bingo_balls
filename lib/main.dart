@@ -15,10 +15,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: BingoLotery().id,
-      routes: {
-        BingoLotery().id: (_) =>  BingoLotery(),
-      },
+      home: _body(),
+    );
+  }
+  _body(){
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: BingoLotery(),
+      ),
     );
   }
 }
