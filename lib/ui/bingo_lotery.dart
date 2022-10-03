@@ -4,7 +4,7 @@ import 'package:flutter_bingo_balls/ui/models/marble_model.dart';
 class BingoLotery extends StatefulWidget {
   final String id = "bingo_lotery";
   Color color;
-  
+
   BingoLotery({Key? key, this.color = Colors.white}) : super(key: key);
 
   @override
@@ -45,14 +45,11 @@ class _BingoLoteryState extends State<BingoLotery> {
                   _marble(marble: Marble(number: 45, color: Colors.amber)),
                   _marble(marble: Marble(number: 70, color: Colors.red)),
                   _marble(marble: Marble(number: 93, color: Colors.cyan)),
+                  //
                 ],
               ),
             )),
-            FloatingActionButton(
-              onPressed: (){
-
-              }
-            ),
+        FloatingActionButton(onPressed: () {}),
       ],
     );
   }
@@ -67,7 +64,12 @@ class _BingoLoteryState extends State<BingoLotery> {
         color: marble.color,
       ),
       //alignment: Alignment.center,
-      child: Center(child: Text("${marble.number}", style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),)),
+      child: Center(
+          child: Text(
+        "${marble.number}",
+        style: const TextStyle(
+            color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+      )),
     );
   }
 }
