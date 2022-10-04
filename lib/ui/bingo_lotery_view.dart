@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bingo_balls/ui/bingo_lotery.dart';
 import 'package:flutter_bingo_balls/ui/marble_lotery.dart';
+import 'package:flutter_bingo_balls/ui/models/list_marbles.dart';
+import 'package:flutter_bingo_balls/ui/models/marble_model.dart';
 
 class BingoLoteryView extends StatefulWidget {
   final String id = "bingo_lotery_view";
@@ -14,19 +16,19 @@ class BingoLoteryView extends StatefulWidget {
 }
 
 class _BingoLoteryViewState extends State<BingoLoteryView> {
-  List<MarbleLotery> listMarbles = [];
+  ListMarbles _lista =  ListMarbles(list: [Marble(number:  Random().nextInt(89) + 1, color: Colors.primaries[Random().nextInt(Colors.primaries.length)])]);
   List<int> listNumber = [];
-
+  MarbleLotery Aux= MarbleLotery(number:Random().nextInt(89) + 1, color: Colors.red.withOpacity(0), sizeCircle: 120);
   Random rnd = Random();
   _numberUnique() {
     bool flag = false;
     int random = 0;
 
     if (listNumber.isEmpty) {
-      return rnd.nextInt(99) + 1;
+      return rnd.nextInt(89) + 1;
     }
     while (!flag) {
-      random = rnd.nextInt(99) + 1;
+      random = rnd.nextInt(89) + 1;
       flag = !listNumber.contains(random);
     }
     return random;
@@ -49,15 +51,17 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
   late double currentSizeCircle = sizeCircleA;
 
   _addMarble() {
-    if (listNumber.length < 99) {
+    if (listNumber.length < 90) {
       _addNumber();
+      _lista.addLMarbles( Marble(
+          number: listNumber.last,
+          color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+          sizeCircle: 40));
+
     } else {
       print("lista llena");
     }
-    listMarbles.add(MarbleLotery(
-        number: listNumber.last,
-        color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-        sizeCircle: 40));
+
   }
 
   _animation() {
@@ -87,7 +91,7 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
             ),
             CustomBingoLotery(
               backgroundColor: Colors.red,
-              listMarbles: listMarbles,
+              listMarbles: this._lista,
             ),
             Stack(
               alignment: Alignment.center,
@@ -111,7 +115,7 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
                         shape: BoxShape.circle,
                       ),
                       child: MarbleLotery(
-                          number: 20,
+                          number:_lista.list[_lista.list.length-1].number,
                           color: Colors.red.withOpacity(opacity),
                           sizeCircle: currentSizeCircle),
                     ),

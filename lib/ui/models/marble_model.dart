@@ -3,5 +3,6 @@ import 'package:flutter/material.dart';
 class Marble {
   int number;
   Color color;
-  Marble({required this.number,required this.color});
+  double sizeCircle;
+  Marble({required this.number,required this.color, this.sizeCircle = 90 });
 }

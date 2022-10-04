@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bingo_balls/ui/marble_lotery.dart';
+import 'package:flutter_bingo_balls/ui/models/list_marbles.dart';
+import 'package:flutter_bingo_balls/ui/models/marble_model.dart';
 
 class CustomBingoLotery extends StatefulWidget {
   final Color backgroundColor;
   final double height;
-  final List<MarbleLotery> listMarbles;
+  final ListMarbles listMarbles;
   const CustomBingoLotery(
       {Key? key,
       this.backgroundColor = Colors.white,
@@ -36,9 +38,11 @@ class _CustomBingoLoteryState extends State<CustomBingoLotery> {
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            return widget.listMarbles.reversed.elementAt(index);
+            var i = index-1;
+            var w = widget.listMarbles.list.reversed.map((e) => MarbleLotery(number: e.number ,color: e.color, sizeCircle: 45)).toList().elementAt(index);
+            return w;
           },
-          itemCount: widget.listMarbles.length,
+          itemCount: widget.listMarbles.list.length-1, // no muestra el primer elemento ingresado por defecto
           separatorBuilder: (context, index) => const SizedBox(
             width: 4,
           ),
