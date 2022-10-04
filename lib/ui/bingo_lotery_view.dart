@@ -16,9 +16,16 @@ class BingoLoteryView extends StatefulWidget {
 }
 
 class _BingoLoteryViewState extends State<BingoLoteryView> {
-  ListMarbles _lista =  ListMarbles(list: [Marble(number:  Random().nextInt(89) + 1, color: Colors.primaries[Random().nextInt(Colors.primaries.length)])]);
+  ListMarbles _lista = ListMarbles(list: [
+    Marble(
+        number: Random().nextInt(89) + 1,
+        color: Colors.primaries[Random().nextInt(Colors.primaries.length)])
+  ]);
   List<int> listNumber = [];
-  MarbleLotery Aux= MarbleLotery(number:Random().nextInt(89) + 1, color: Colors.red.withOpacity(0), sizeCircle: 120);
+  MarbleLotery Aux = MarbleLotery(
+      number: Random().nextInt(89) + 1,
+      color: Colors.red.withOpacity(0),
+      sizeCircle: 120);
   Random rnd = Random();
   _numberUnique() {
     bool flag = false;
@@ -53,15 +60,13 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
   _addMarble() {
     if (listNumber.length < 90) {
       _addNumber();
-      _lista.addLMarbles( Marble(
+      _lista.addLMarbles(Marble(
           number: listNumber.last,
           color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
           sizeCircle: 40));
-
     } else {
       print("lista llena");
     }
-
   }
 
   _animation() {
@@ -71,9 +76,15 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
         currentSizeCircle == sizeCircleA ? sizeCircleB : sizeCircleA;
   }
 
+  int cargado = 1;
   _endAnimation() {
     setState(() {
-      _addMarble();
+      if (cargado == 1) {
+        cargado = 2;
+      } else {
+        cargado = 1;
+        _addMarble();
+      }
     });
   }
 
@@ -115,8 +126,8 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
                         shape: BoxShape.circle,
                       ),
                       child: MarbleLotery(
-                          number:_lista.list[_lista.list.length-1].number,
-                          color: Colors.red.withOpacity(opacity),
+                          number: _lista.list[_lista.list.length - 1].number,
+                          color: _lista.list[_lista.list.length - 1].color,
                           sizeCircle: currentSizeCircle),
                     ),
                   ),
