@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bingo_balls/ui/bingo_lotery.dart';
+import 'package:flutter_bingo_balls/ui/bingo_lotery_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,10 +19,10 @@ class MyApp extends StatelessWidget {
     );
   }
   _body(){
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
-        body: BingoLotery(),
+        body: BingoLoteryView(),
       ),
     );
   }

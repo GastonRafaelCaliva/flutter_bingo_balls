@@ -1,73 +1,74 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bingo_balls/ui/models/marble_model.dart';
+import 'package:flutter_bingo_balls/ui/marble_lotery.dart';
 
-class BingoLotery extends StatefulWidget {
-  final String id = "bingo_lotery";
-  Color color;
-  
-  BingoLotery({Key? key, this.color = Colors.white}) : super(key: key);
+class CustomBingoLotery extends StatefulWidget {
+  final Color backgroundColor;
+  final double height;
+  final List<MarbleLotery> listMarbles;
+  const CustomBingoLotery(
+      {Key? key,
+      this.backgroundColor = Colors.white,
+      this.height = 56,
+      required this.listMarbles})
+      : super(key: key);
 
   @override
-  State<BingoLotery> createState() => _BingoLoteryState();
+  State<CustomBingoLotery> createState() => _CustomBingoLoteryState();
 }
 
-class _BingoLoteryState extends State<BingoLotery> {
+class _CustomBingoLoteryState extends State<CustomBingoLotery> {
   @override
   Widget build(BuildContext context) {
     return _body();
   }
 
   _body() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-            height: 60,
-            width: double.infinity,
-            margin: const EdgeInsets.only(top: 40),
-            padding: const EdgeInsets.all(7),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: widget.color,
-            ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _marble(marble: Marble(number: 20, color: Colors.amber)),
-                  _marble(marble: Marble(number: 32, color: Colors.red)),
-                  _marble(marble: Marble(number: 76, color: Colors.blue)),
-                  _marble(marble: Marble(number: 49, color: Colors.amber)),
-                  _marble(marble: Marble(number: 99, color: Colors.red)),
-                  _marble(marble: Marble(number: 73, color: Colors.cyan)),
-                  _marble(marble: Marble(number: 45, color: Colors.amber)),
-                  _marble(marble: Marble(number: 70, color: Colors.red)),
-                  _marble(marble: Marble(number: 93, color: Colors.cyan)),
-                ],
-              ),
-            )),
-            FloatingActionButton(
-              onPressed: (){
-
-              }
-            ),
-      ],
+    return Container(
+      height: widget.height,
+      width: double.infinity,
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(45),
+        color: widget.backgroundColor,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(45),
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return widget.listMarbles.reversed.elementAt(index);
+          },
+          itemCount: widget.listMarbles.length,
+          separatorBuilder: (context, index) => const SizedBox(
+            width: 4,
+          ),
+        ),
+      ),
     );
   }
+}
 
-  _marble({required Marble marble}) {
-    return Container(
-      height: 33,
-      width: 33,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: marble.color,
-      ),
-      //alignment: Alignment.center,
-      child: Center(child: Text("${marble.number}", style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),)),
-    );
+class ContainerBingoLotery extends Container {
+  final Color backgroundColor;
+  final double height;
+  final List<MarbleLotery> listMarbles;
+  ContainerBingoLotery(
+      {Key? key,
+      this.backgroundColor = Colors.white,
+      this.height = 56,
+      required this.listMarbles})
+      : super(
+          key: key,
+          height: height,
+          width: double.infinity,
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(45),
+            color: backgroundColor,
+          ),
+        );
+  @override
+  Widget build(BuildContext context) {
+    return Container(); //nose
   }
 }
