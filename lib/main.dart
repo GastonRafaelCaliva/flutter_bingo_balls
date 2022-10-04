@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       home: _body(),
     );
-  }
+  }//q onda cali gano boca
   _body(){
     return const SafeArea(
       child: Scaffold(
