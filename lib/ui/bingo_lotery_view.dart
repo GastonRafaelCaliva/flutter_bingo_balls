@@ -1,9 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bingo_balls/ui/bingo_lotery.dart';
+import 'package:flutter_bingo_balls/ui/custom_bingo_lotery.dart';
 import 'package:flutter_bingo_balls/ui/marble_lotery.dart';
-import 'package:flutter_bingo_balls/ui/models/list_marbles.dart';
 import 'package:flutter_bingo_balls/ui/models/marble_model.dart';
 
 class BingoLoteryView extends StatefulWidget {
@@ -16,9 +15,9 @@ class BingoLoteryView extends StatefulWidget {
 }
 
 class _BingoLoteryViewState extends State<BingoLoteryView> {
-  ListMarbles _lista =  ListMarbles(list: [Marble(number:  Random().nextInt(89) + 1, color: Colors.primaries[Random().nextInt(Colors.primaries.length)])]);
+  List<MarbleLotery> listMarbles=[];
   List<int> listNumber = [];
-  MarbleLotery Aux= MarbleLotery(number:Random().nextInt(89) + 1, color: Colors.red.withOpacity(0), sizeCircle: 120);
+  MarbleLotery aux = ;
   Random rnd = Random();
   _numberUnique() {
     bool flag = false;
@@ -51,16 +50,17 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
   late double currentSizeCircle = sizeCircleA;
 
   _addMarble() {
+    /*
     if (listNumber.length < 90) {
       _addNumber();
-      _lista.addLMarbles( Marble(
+      listMarbles.add( Marble(
           number: listNumber.last,
           color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
           sizeCircle: 40));
 
     } else {
       print("lista llena");
-    }
+    }*/
 
   }
 
@@ -91,7 +91,8 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
             ),
             CustomBingoLotery(
               backgroundColor: Colors.red,
-              listMarbles: this._lista,
+              listMarbles: listMarbles,
+
             ),
             Stack(
               alignment: Alignment.center,
@@ -101,7 +102,6 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
                   height: 240,
                   child: AnimatedAlign(
                     onEnd: () {
-                      print("HOLAAAAAAAAAAAA");
                       _endAnimation();
                     },
                     duration: const Duration(milliseconds: 600),
@@ -115,7 +115,7 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
                         shape: BoxShape.circle,
                       ),
                       child: MarbleLotery(
-                          number:_lista.list[_lista.list.length-1].number,
+                          number:_numberUnique(),//listMarbles[listMarbles.length-1].number,
                           color: Colors.red.withOpacity(opacity),
                           sizeCircle: currentSizeCircle),
                     ),
