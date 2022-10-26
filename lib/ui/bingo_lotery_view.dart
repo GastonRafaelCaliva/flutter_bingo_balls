@@ -1,8 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bingo_balls/ui/models/marble_model.dart';
-import 'package:flutter_bingo_balls/ui/widget_bingo.dart';
+import 'package:flutter_bingo_balls/ui/custom_bingo_hype.dart';
 
 class BingoLoteryView extends StatefulWidget {
   final String id = "bingo_lotery_view";
@@ -35,6 +34,7 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
     print("Añadiendo numero");
     print(listNumber);
   }
+
   double sizeCircleA = 120;
   double sizeCircleB = 40;
   late double currentSizeCircle = sizeCircleA;
@@ -46,7 +46,8 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
         number: listNumber.last,
         color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
       ));
-    } else {
+    } 
+    else {
       print("lista llena");
     }
   }
@@ -64,31 +65,8 @@ class _BingoLoteryViewState extends State<BingoLoteryView> {
             const SizedBox(
               height: 20,
             ),
-            WidgetBingo(
-              listMarbles: listMarbles,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            WidgetBingo(
-              listMarbles: listMarbles,
-              height: 90,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            WidgetBingo(
-              listMarbles: listMarbles,
-              height: 70,
-              width: 200,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: WidgetBingo(
-                listMarbles: listMarbles,
+            Container(
+              child: CustomBingoHype( listMarbles: listMarbles,
               ),
             ),
             const SizedBox(
